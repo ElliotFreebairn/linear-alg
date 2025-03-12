@@ -28,21 +28,6 @@ public class DeterminantFinder {
 
       return determinant;
     }
-
-    //int row = 0;
-    //int determinant = 0;
-
-    //for(int col = 0; col < matrix.length; col++) {
-    //  int cofactor = getCofactor(row, col);
-    // 
-    //  if(isTwoByTwo(matrix)) {
-    //    determinant += cofactor * (matrix[row][col] * getTwoByTwoDeterminant(matrix));
-    //  } else {
-    //    int[][] minor = getMinor(matrix, 0, col);
-    //    determinant += getDeterminant(minor);
-    //  }
-    //}
-    //return determinant;
   }
 
   private static int[][] getMinor(int[][] matrix, int row, int col) {
