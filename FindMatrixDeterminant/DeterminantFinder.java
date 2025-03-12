@@ -1,3 +1,5 @@
+
+
 public class DeterminantFinder {
   
   public static void main(String[] args) {
@@ -6,20 +8,41 @@ public class DeterminantFinder {
   }
 
   public static int getDeterminant(int[][] matrix) {
-    int row = 0;
-    int determinant = 0;
 
-    for(int col = 0; col < matrix.length; col++) {
-      int cofactor = getCofactor(row, col);
-      int[][] minor = getMinor(matrix, 0, col);
+    if(isTwoByTwo(matrix)) {
+      return getTwoByTwoDeterminant(matrix);
+    } else {
+      int row = 0;
+      int determinant = 0;
 
-      if(isTwoByTwo(minor)) {
-        determinant += cofactor * (matrix[row][col] * getTwoByTwoDeterminant(minor));
-      } else {
-        determinant += getDeterminant(minor);
+      for(int col = 0; col < matrix.length; col++) {
+        int cofactor = getCofactor(row, col);
+        int[][] minor = getMinor(matrix, row, col);
+
+        if(isTwoByTwo(minor)) {
+          determinant += cofactor * (matrix[row][col] * getTwoByTwoDeterminant(minor));
+        } else {
+          determinant += getDeterminant(minor);
+        }
       }
+
+      return determinant;
     }
-    return determinant;
+
+    //int row = 0;
+    //int determinant = 0;
+
+    //for(int col = 0; col < matrix.length; col++) {
+    //  int cofactor = getCofactor(row, col);
+    // 
+    //  if(isTwoByTwo(matrix)) {
+    //    determinant += cofactor * (matrix[row][col] * getTwoByTwoDeterminant(matrix));
+    //  } else {
+    //    int[][] minor = getMinor(matrix, 0, col);
+    //    determinant += getDeterminant(minor);
+    //  }
+    //}
+    //return determinant;
   }
 
   private static int[][] getMinor(int[][] matrix, int row, int col) {
@@ -48,7 +71,7 @@ public class DeterminantFinder {
   }
 
   private static int getTwoByTwoDeterminant(int[][] matrix) {
-    return ((matrix[0][0]*matrix[1][1]) - (matrix[0][1]*matrix[1][0]));
+    return ((matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]));
   }
 
   private static boolean isTwoByTwo(int[][] matrix) {
@@ -58,12 +81,13 @@ public class DeterminantFinder {
     return false;
   }
 
-//  private static void printMatrix(int[][] matrix) {
-//    for(int i = 0; i < matrix.length; i++) {
-//      for(int j = 0; j < matrix[i].length; j++) {
-//        System.out.print("|" + matrix[i][j] + "| " );
-//      }
-//      System.out.println("\n" + "-".repeat(matrix[i].length * 5));
-//    }
-//  }
+  private static void printMatrix(int[][] matrix) {
+    for(int i = 0; i < matrix.length; i++) {
+      for(int j = 0; j < matrix[i].length; j++) {
+        System.out.print("|" + matrix[i][j] + "| " );
+      }
+      System.out.println("\n" + "-".repeat(matrix[i].length * 5));
+    }
+  }
+
 }
